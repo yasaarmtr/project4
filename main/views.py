@@ -209,3 +209,18 @@ def shop(request):
 
 def test(request):
     return render(request, 'store/test.html')
+
+
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product.delete()
+    messages.success(request, "Product deleted successfully.")
+    return redirect('store:product_list')  # Assuming you have a product list view
+
+@login_required
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    category.delete()
+    messages.success(request, "Category deleted successfully.")
+    return redirect('store:category_list')  # Assuming you have a category list view
